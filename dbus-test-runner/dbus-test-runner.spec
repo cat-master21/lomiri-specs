@@ -2,7 +2,7 @@
 
 Name:           dbus-test-runner
 Version:        19.04.0
-Release:        1
+Release:        1%{?dist}
 Summary:        A small utility to run executables under a new DBus session for testing
 License:        GPLv3+
 URL:            https://launchpad.net/dbus-test-runner

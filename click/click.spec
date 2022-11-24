@@ -2,7 +2,7 @@
 
 Name:           click
 Version:        0.5.0
-Release:        1
+Release:        1%{?dist}
 Summary:        A small library for handling URLs over dbus
 
 License:        LGPLv3+

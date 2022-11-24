@@ -2,7 +2,7 @@
 
 Name:          lomiri-api
 Version:       0.1.1
-Release:       1
+Release:       1%{?dist}
 Summary:       API for Lomiri
 
 License:       LGPLv3+
