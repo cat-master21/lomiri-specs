@@ -9,6 +9,7 @@ License:        LGPLv3+
 URL:            https://gitlab.com/ubports/development/core/click
 Source0:        %{url}/-/archive/%{version}/click-%{version}.tar.gz
 
+BuildRequires: automake libtool
 BuildRequires: pkgconfig
 BuildRequires: make
 BuildRequires: g++
