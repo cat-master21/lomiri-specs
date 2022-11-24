@@ -1,17 +1,16 @@
 %global source_date_epoch_from_changelog 0
 
-Name:           lomiri-api
-Version:        0.1.1
-Release:        1
-Summary:        API for Lomiri
+Name:          lomiri-api
+Version:       0.1.1
+Release:       1
+Summary:       API for Lomiri
 
-License:        LGPLv3+
-URL:            https://gitlab.com/ubports/core/lomiri-api
-Source0:        %{url}/-/archive/%{version}/lomiri-api-%{version}.tar.gz
+License:       LGPLv3+
+URL:           https://gitlab.com/ubports/core/lomiri-api
+Source0:       %{url}/-/archive/%{version}/lomiri-api-%{version}.tar.gz
 
 BuildRequires: cmake
 BuildRequires: pkgconfig
-BuildRequires: make
 BuildRequires: g++
 BuildRequires: gcc
 BuildRequires: pkgconfig(glib-2.0)
@@ -21,7 +20,7 @@ API to interface with the Lomiri desktop environment.
 
 
 %package devel
-Summary:	API library for Lomiri
+Summary:  API library for Lomiri
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
