@@ -22,7 +22,7 @@ A very simple convenience library for handling properties and signals in C++11.
 
 
 %package doc
-Summary:  properties-cpp development files
+Summary:  properties-cpp documentation files
 BuildArch: noarch
 
 %description doc

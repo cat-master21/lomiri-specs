@@ -11,6 +11,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] lomiri-mir
 * [X] apparmor
 * [X] lomiri-url-dispatcher
+* [X] process-cpp
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
