@@ -9,6 +9,8 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] lomiri-app-launch
 * [X] dbus-test-runner
 * [X] lomiri-mir
+* [X] apparmor
+* [] lomiri-url-dispatcher
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
