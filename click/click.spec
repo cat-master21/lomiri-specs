@@ -77,8 +77,6 @@ rm -rf %{buildroot}%{_bindir}/dh_click %{buildroot}%{_datarootdir}/debhelper %{b
 %license LICENSE
 %{_libdir}/libclick-0.4.so.*
 %{_libdir}/click/libclickpreload.so
-%{_libdir}/girepository-1.0/Click-0.4.typelib
-%{_datarootdir}/gir-1.0/Click-0.4.gir
 
 
 %files devel
@@ -87,6 +85,8 @@ rm -rf %{buildroot}%{_bindir}/dh_click %{buildroot}%{_datarootdir}/debhelper %{b
 %{_includedir}/click-0.4/click.h
 %{_libdir}/libclick-0.4.so
 %{_libdir}/pkgconfig/click-0.4.pc
+%{_libdir}/girepository-1.0/Click-0.4.typelib
+%{_datarootdir}/gir-1.0/Click-0.4.gir
 
 %files -n python3-click
 %license LICENSE

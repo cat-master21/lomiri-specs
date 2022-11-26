@@ -6,7 +6,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] lomiri-api
 * [] qtmir
 * [X] click
-* [] lomiri-app-launch
+* [X] lomiri-app-launch
 * [X] dbus-test-runner
 * [X] lomiri-mir
 
