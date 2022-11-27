@@ -4,7 +4,7 @@ Name:           lomiri-url-dispatcher
 # Commit: 09ca48196381fbdeb32cf48b60a64a6cda77fd9f
 # Update Release
 Version:        0.1.0
-Release:        1
+Release:        1%{?dist}
 Summary:        A small library for handling URLs over dbus
 
 License:        LGPLv3+
@@ -22,6 +22,7 @@ BuildRequires: pkgconfig(json-glib-1.0)
 BuildRequires: pkgconfig(dbustest-1)
 BuildRequires: pkgconfig(sqlite3)
 BuildRequires: pkgconfig(libapparmor)
+Requires:      lomiri-ui-toolkit
 
 
 %description
