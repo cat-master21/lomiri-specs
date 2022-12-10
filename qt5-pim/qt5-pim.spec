@@ -1,28 +1,18 @@
 %global source_date_epoch_from_changelog 0
 
-Name:    qt5-mobility
-Summary: Qt5 Mobility Framework
+Name:    qt5-pim
+Summary: Qt5 PIM Framework
 Version: 5.15
 Release: 1%{?dist}
 
 License: GPLv3 with exceptions
-URL:     https://invent.kde.org/qt/qt/qtsystems
-Source0: https://invent.kde.org/qt/qt/qtsystems/-/archive/dev/qtsystems-dev.tar.gz
-Source1: https://salsa.debian.org/qt-kde-team/qt/qtsystems/-/archive/master/qtsystems-master.tar.gz
+URL:     https://invent.kde.org/qt/qt/qtpim
+Source0: https://invent.kde.org/qt/qt/qtpim/-/archive/kde/5.15/qtpim-kde-%{version}.tar.gz
+Source1: https://salsa.debian.org/qt-kde-team/qt/qtpim/-/archive/master/qtpim-master.tar.gz
 
 BuildRequires: make
 BuildRequires: gcc-c++
-BuildRequires: pkgconfig(alsa)
-BuildRequires: pkgconfig(blkid)
-BuildRequires: pkgconfig(bluez)
-BuildRequires: pkgconfig(libnm)
-BuildRequires: pkgconfig(libpulse)
-BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(QtCore)
-BuildRequires: pkgconfig(QtDeclarative)
-BuildRequires: pkgconfig(QtGui) pkgconfig(QtOpenGL)
-BuildRequires: pkgconfig(QtNetwork) >= 4.7
-BuildRequires: pkgconfig(xv)
 BuildRequires: perl
 BuildRequires: qt5-doctools
 BuildRequires: qt5-rpm-macros
@@ -85,30 +75,37 @@ Requires: %{name}-devel
 
 
 %prep
-%autosetup -n qtsystems-dev
+%autosetup -n qtpim-kde-%{version}
 tar -xf '%{SOURCE1}'
-for i in qtsystems-master/debian/patches/*.patch; do patch -p1 < $i; done
+for i in qtpim-master/debian/patches/*.patch; do patch -p1 < $i; done
 mkdir .git
 
 %build
 PATH=%{_qt5_bindir}:$PATH; export PATH
 # Build headers manually
-cd src/systeminfo/ && perl /usr/bin/syncqt.pl -module QtSystemInfo -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd src/contacts/ && perl /usr/bin/syncqt.pl -module QtContacts -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
-cd publishsubscribe/ && perl /usr/bin/syncqt.pl -module QtPublishSubscribe -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd organizer/ && perl /usr/bin/syncqt.pl -module QtOrganizer -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
-cd serviceframework/ && perl /usr/bin/syncqt.pl -module QtServiceFramework -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd versit/ && perl /usr/bin/syncqt.pl -module QtVersit -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd ../
+cd versitorganizer/ && perl /usr/bin/syncqt.pl -module QtVersitOrganizer -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../../
 
 # For building
-cd ./redhat-linux-build/include/QtPublishSubscribe
-ln -s 5.4.0/QtPublishSubscribe/private
-cd ../QtServiceFramework
-ln -s 5.4.0/QtServiceFramework/private
-cd ../QtSystemInfo
-ln -s 5.4.0/QtSystemInfo/private
+cd ./redhat-linux-build/include/QtContacts
+ln -s 5.4.0/QtContacts/private
+cd ../QtOrganizer
+ln -s 5.4.0/QtOrganizer/private
+cd ../QtVersit
+ln -s 5.4.0/QtVersit/private
+cd ../QtVersitOrganizer
+ln -s 5.4.0/QtVersitOrganizer/private
 cd ../../../
 
+# Fails to build qmake complains out-of-source build? Fix later
+#sed -i '/organizer/d' examples/examples.pro
+#export CXXFLAGS="%{optflags} -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H"
 cd ./redhat-linux-build
 qmake-qt5 -d ..
 
@@ -121,66 +118,69 @@ qmake-qt5 -d ..
 cd ./redhat-linux-build
 make INSTALL_ROOT=%{buildroot} install STRIP=/bin/true
 
+# Did not install examples so empty directory
+#rm -rf %{buildroot}%{_qt5_examplesdir}
 # manually install docs
 mkdir -p %{buildroot}%{_qt5_docdir}/html/ %{buildroot}%{_qt5_docdir}/qch/
 mv doc/*.qch %{buildroot}%{_qt5_docdir}/qch/
 cp -a doc/* %{buildroot}%{_qt5_docdir}/html/
-
-# Is not needed/out of source
-rm -f %{buildroot}%{_qt5_examplesdir}/examples.pro
+# manually install headers
+#cp -a ./include/* %{buildroot}%{_qt5_includedir}
 
 %files
 %license LICENSE.GPL2 LICENSE.GPL3 LICENSE.GPL3-EXCEPT
-%{_libdir}/libQt5PublishSubscribe.so.*
-%{_libdir}/libQt5ServiceFramework.so.*
-%{_libdir}/libQt5SystemInfo.so.*
-%{_qt5_bindir}/servicefw
-%{_qt5_bindir}/sfwlisten
-%dir %{_qt5_qmldir}/QtPublishSubscribe
-%{_qt5_qmldir}/QtPublishSubscribe/*.so
-%{_qt5_qmldir}/QtPublishSubscribe/qmldir
-%{_qt5_qmldir}/QtPublishSubscribe/*.qmltypes
-%dir %{_qt5_qmldir}/QtServiceFramework
-%{_qt5_qmldir}/QtServiceFramework/*.so
-%{_qt5_qmldir}/QtServiceFramework/qmldir
-%{_qt5_qmldir}/QtServiceFramework/*.qmltypes
-%dir %{_qt5_qmldir}/QtSystemInfo
-%{_qt5_qmldir}/QtSystemInfo/*.so
-%{_qt5_qmldir}/QtSystemInfo/qmldir
-%{_qt5_qmldir}/QtSystemInfo/*.qmltypes
+%{_libdir}/libQt5Contacts.so.*
+%{_libdir}/libQt5Organizer.so.*
+%{_libdir}/libQt5Versit.so.*
+%{_libdir}/libQt5VersitOrganizer.so.*
+%dir %{_qt5_qmldir}/QtContacts
+%{_qt5_qmldir}/QtContacts/*.so
+%{_qt5_qmldir}/QtContacts/qmldir
+%{_qt5_qmldir}/QtContacts/*.qmltypes
+%dir %{_qt5_qmldir}/QtOrganizer
+%{_qt5_qmldir}/QtOrganizer/*.so
+%{_qt5_qmldir}/QtOrganizer/qmldir
+%{_qt5_qmldir}/QtOrganizer/*.qmltypes
+%dir %{_qt5_plugindir}/contacts
+%{_qt5_plugindir}/contacts/*.so
+%dir %{_qt5_plugindir}/organizer
+%{_qt5_plugindir}/organizer/*.so
+%dir %{_qt5_plugindir}/versit
+%{_qt5_plugindir}/versit/*.so
 
 %files devel
 %license LICENSE.GPL2 LICENSE.GPL3 LICENSE.GPL3-EXCEPT
 %{_libdir}/*.prl
-%{_libdir}/libQt5PublishSubscribe.so
-%{_libdir}/libQt5ServiceFramework.so
-%{_libdir}/libQt5SystemInfo.so
+%{_libdir}/libQt5Contacts.so
+%{_libdir}/libQt5Organizer.so
+%{_libdir}/libQt5Versit.so
+%{_libdir}/libQt5VersitOrganizer.so
 %{_libdir}/pkgconfig/*.pc
-%dir %{_libdir}/cmake/Qt5PublishSubscribe
-%{_libdir}/cmake/Qt5PublishSubscribe/*.cmake
-%dir %{_libdir}/cmake/Qt5ServiceFramework
-%{_libdir}/cmake/Qt5ServiceFramework/*.cmake
-%dir %{_libdir}/cmake/Qt5SystemInfo
-%{_libdir}/cmake/Qt5SystemInfo/*.cmake
+%dir %{_libdir}/cmake/Qt5Contacts
+%{_libdir}/cmake/Qt5Contacts/*.cmake
+%dir %{_libdir}/cmake/Qt5Organizer
+%{_libdir}/cmake/Qt5Organizer/*.cmake
+%dir %{_libdir}/cmake/Qt5Versit
+%{_libdir}/cmake/Qt5Versit/*.cmake
+%dir %{_libdir}/cmake/Qt5VersitOrganizer
+%{_libdir}/cmake/Qt5VersitOrganizer/*.cmake
 %{_qt5_archdatadir}/mkspecs/modules/*.pri
-%{_qt5_includedir}/QtPublishSubscribe/
-%{_qt5_includedir}/QtServiceFramework/
-%{_qt5_includedir}/QtSystemInfo/
+%{_qt5_includedir}/QtContacts/
+%{_qt5_includedir}/QtOrganizer/
+%{_qt5_includedir}/QtVersit/
+%{_qt5_includedir}/QtVersitOrganizer/
 
 %files doc
 %license LICENSE.FDL
 %{_qt5_docdir}/qch/*.qch
-%{_qt5_docdir}/html/qtpublishsubscribe/
-%{_qt5_docdir}/html/qtserviceframework/
-%{_qt5_docdir}/html/qtsysteminfo/
+%{_qt5_docdir}/html/qtcontacts/
+%{_qt5_docdir}/html/qtorganizer/
+%{_qt5_docdir}/html/qtversit/
 
 %files examples
-%dir %{_qt5_examplesdir}/systeminfo
-%{_qt5_examplesdir}/systeminfo/*.pro
-%{_qt5_examplesdir}/systeminfo/inputinfo/
-%{_qt5_examplesdir}/systeminfo/qml-battery/
-%{_qt5_examplesdir}/systeminfo/qml-deviceinfo/
-%{_qt5_examplesdir}/systeminfo/qml-inputinfo/
+%dir %{_qt5_examplesdir}/contacts
+%{_qt5_examplesdir}/contacts/*.pro
+%{_qt5_examplesdir}/organizer/
 
 
 %changelog

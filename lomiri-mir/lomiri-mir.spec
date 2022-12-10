@@ -19,14 +19,14 @@ Summary:        Next generation display server (Lomiri version)
 # mirclient is LGPLv2/LGPLv3, everything else is GPLv2/GPLv3
 License:        (GPLv2 or GPLv3) and (LGPLv2 or LGPLv3)
 URL:            https://mir-server.io/
-Source0:        https://github.com/MirServer/mir/archive/v%{version}/mir-%{version}.tar.gz
+Source0:        https://github.com/MirServer/mir/archive/refs/heads/release/1.8.tar.gz
 Source1:        https://gitlab.com/ubports/development/core/packaging/mir/-/archive/fix_gcc11/mir-fix_gcc11.tar.gz
 
 # Backports from upstream
 ## From: https://github.com/MirServer/mir/commit/7ccc9d4f880a98f0e80c88ee4e2ed88213433093
-Patch0004:      https://github.com/MirServer/mir/commit/7ccc9d4f880a98f0e80c88ee4e2ed88213433093.patch
+#Patch0004:      https://github.com/MirServer/mir/commit/7ccc9d4f880a98f0e80c88ee4e2ed88213433093.patch
 ## From: https://github.com/MirServer/mir/commit/98a8a63da640b39d0c566696f82a3d3de1662fc2
-Patch0005:      https://github.com/MirServer/mir/commit/98a8a63da640b39d0c566696f82a3d3de1662fc2.patch
+#Patch0005:      https://github.com/MirServer/mir/commit/98a8a63da640b39d0c566696f82a3d3de1662fc2.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake, ninja-build, doxygen, graphviz, lcov, gcovr
@@ -95,18 +95,18 @@ and a well-defined driver model.
 
 %package utils
 Summary:       Utilities for Mir
-Requires:      %{name}-server-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:      %{name}-client-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:      %{name}-server-libs%{?_isa} = %{version}-%{release}
+Requires:      %{name}-client-libs%{?_isa} = %{version}-%{release}
 
 %description utils
 Utilities for Mir.
 
 %package devel
 Summary:       Development files for Mir
-Requires:      %{name}-common-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:      %{name}-server-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:      %{name}-client-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:      %{name}-test-libs-static%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:      %{name}-common-libs%{?_isa} = %{version}-%{release}
+Requires:      %{name}-server-libs%{?_isa} = %{version}-%{release}
+Requires:      %{name}-client-libs%{?_isa} = %{version}-%{release}
+Requires:      %{name}-test-libs-static%{?_isa} = %{version}-%{release}
 
 %description devel
 This package provides the development files to create
@@ -123,7 +123,7 @@ by Mir clients or Mir servers.
 %package server-libs
 Summary:       Server libraries for Mir
 License:       GPLv2 or GPLv3
-Requires:      %{name}-common-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:      %{name}-common-libs%{?_isa} = %{version}-%{release}
 
 %description server-libs
 This package provides the libraries for applications
@@ -132,7 +132,7 @@ that use the Mir server.
 %package client-libs
 Summary:       Client libraries for Mir
 License:       LGPLv2 or LGPLv3
-Requires:      %{name}-common-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:      %{name}-common-libs%{?_isa} = %{version}-%{release}
 # debug extension for mirclient is gone...
 Obsoletes:     %{name}-client-libs-debugext < 1.6.0
 
@@ -143,8 +143,8 @@ that connect to a Mir server.
 %package test-tools
 Summary:       Testing tools for Mir
 License:       GPLv2 or GPLv3
-Requires:      %{name}-server-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:      %{name}-client-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:      %{name}-server-libs%{?_isa} = %{version}-%{release}
+Requires:      %{name}-client-libs%{?_isa} = %{version}-%{release}
 Recommends:    %{name}-demos
 Recommends:    glmark2
 Recommends:    xorg-x11-server-Xwayland
@@ -156,9 +156,10 @@ This package provides tools for testing Mir.
 %package demos
 Summary:       Demonstration applications using Mir
 License:       GPLv2 or GPLv3
-Requires:      %{name}-server-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:      %{name}-client-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:      %{name}-server-libs%{?_isa} = %{version}-%{release}
+Requires:      %{name}-client-libs%{?_isa} = %{version}-%{release}
 Requires:      hicolor-icon-theme
+Requires:      redhat-lsb-core
 Recommends:    xorg-x11-server-Xwayland
 # For some of the demos
 Requires:      gnu-free-sans-fonts
@@ -188,7 +189,7 @@ and Mir based applications.
 %package test-libs-static
 Summary:       Testing framework library for Mir
 License:       GPLv2 or GPLv3
-Requires:      %{name}-devel%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:      %{name}-devel%{?_isa} = %{version}-%{release}
 
 %description test-libs-static
 This package provides the static library for building
@@ -196,15 +197,15 @@ Mir unit and integration tests.
 
 
 %prep
-%autosetup -p1 -n mir-%{version}
+%autosetup -p1 -n mir-release-1.8
 
 # Apply Lomiri specific patches
 tar -xf '%{SOURCE1}'
-for i in mir-fix_gcc11/debian/patches/*.patch; do patch -p1 < $i; done
+#for i in mir-fix_gcc11/debian/patches/*.patch; do patch -p1 < $i; done
 for i in mir-fix_gcc11/debian/patches/ubports/*.patch; do patch -p1 < $i; done
 
 # Drop -Werror
-#sed -e "s/-Werror//g" -i CMakeLists.txt
+sed -e "s/-Werror//g" -i CMakeLists.txt
 
 %build
 

@@ -10,7 +10,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] dbus-test-runner
 * [X] lomiri-mir
 * [X] apparmor
-* [] lomiri-url-dispatcher
+* [X] lomiri-url-dispatcher
 * [X] process-cpp
 * [] lomiri-ui-toolkit
 * [X] qt5-mobility
@@ -18,3 +18,6 @@ Lomiri/Unity8 RPM spec files for Fedora
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
+
+## Thanks To
+* [lomiri-on-fedora](https://gitlab.com/erlend.io/lomiri-on-fedora) for examples on how to build some RPMs
