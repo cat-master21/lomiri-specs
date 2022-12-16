@@ -1,0 +1,37 @@
+From f6f46c5bcf2b32ca58f401685d3c8e892e89bddd Mon Sep 17 00:00:00 2001
+From: Erlend <me@erlend.io> & cat-master21 <96554164+cat-master21@users.noreply.github.com>
+Date: Tue, 29 Sep 2020 12:42:18 +0200
+Subject: [PATCH 7/7] temp fix for removed declaration in EGL/eglmesaext.h
+
+---
+ include/platform/mir/graphics/egl_extensions.h | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/include/platform/mir/graphics/egl_extensions.h b/include/platform/mir/graphics/egl_extensions.h
+index b2b8656d08..ecd0b989e5 100644
+--- a/include/platform/mir/graphics/egl_extensions.h
++++ b/include/platform/mir/graphics/egl_extensions.h
+@@ -30,6 +30,20 @@
+ // For Wayland extensions
+ #include <EGL/eglmesaext.h>
+ 
++// Temp fix!!!
++// these declarations where found in EGL/eglmesaext.h in previous version
++// And has now been removed....
++// So I've added them here to make it compile again
++extern "C" {
++EGLAPI EGLBoolean EGLAPIENTRY eglBindWaylandDisplayWL(EGLDisplay dpy, struct wl_display *display);
++EGLAPI EGLBoolean EGLAPIENTRY eglUnbindWaylandDisplayWL(EGLDisplay dpy, struct wl_display *display);
++EGLAPI EGLBoolean EGLAPIENTRY eglQueryWaylandBufferWL(EGLDisplay dpy, struct wl_resource *buffer, EGLint attribute, EGLint *value);
++typedef EGLBoolean (EGLAPIENTRYP PFNEGLBINDWAYLANDDISPLAYWL) (EGLDisplay dpy, struct wl_display *display);
++typedef EGLBoolean (EGLAPIENTRYP PFNEGLUNBINDWAYLANDDISPLAYWL) (EGLDisplay dpy, struct wl_display *display);
++typedef EGLBoolean (EGLAPIENTRYP PFNEGLQUERYWAYLANDBUFFERWL) (EGLDisplay dpy, struct wl_resource *buffer, EGLint attribute, EGLint *value);
++#define EGL_WAYLAND_Y_INVERTED_WL       0x31DB /* eglQueryWaylandBufferWL attribute */
++}
++
+ /*
+  * Just enough polyfill for RPi's EGL headers...
+  */
+-- 
+2.26.2
+

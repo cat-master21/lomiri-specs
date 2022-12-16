@@ -21,12 +21,8 @@ License:        (GPLv2 or GPLv3) and (LGPLv2 or LGPLv3)
 URL:            https://mir-server.io/
 Source0:        https://github.com/MirServer/mir/archive/refs/heads/release/1.8.tar.gz
 Source1:        https://gitlab.com/ubports/development/core/packaging/mir/-/archive/fix_gcc11/mir-fix_gcc11.tar.gz
+Patch0:         0007-temp-fix-for-removed-declaration-in-EGL-eglmesaext.h.patch
 
-# Backports from upstream
-## From: https://github.com/MirServer/mir/commit/7ccc9d4f880a98f0e80c88ee4e2ed88213433093
-#Patch0004:      https://github.com/MirServer/mir/commit/7ccc9d4f880a98f0e80c88ee4e2ed88213433093.patch
-## From: https://github.com/MirServer/mir/commit/98a8a63da640b39d0c566696f82a3d3de1662fc2
-#Patch0005:      https://github.com/MirServer/mir/commit/98a8a63da640b39d0c566696f82a3d3de1662fc2.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake, ninja-build, doxygen, graphviz, lcov, gcovr
@@ -161,6 +157,7 @@ Requires:      %{name}-client-libs%{?_isa} = %{version}-%{release}
 Requires:      hicolor-icon-theme
 Requires:      redhat-lsb-core
 Recommends:    xorg-x11-server-Xwayland
+Recommends:    xterm
 # For some of the demos
 Requires:      gnu-free-sans-fonts
 

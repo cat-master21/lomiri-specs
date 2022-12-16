@@ -15,6 +15,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] lomiri-ui-toolkit
 * [X] qt5-mobility
 * [X] qt5-pim
+* [] gsettings-qt
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
