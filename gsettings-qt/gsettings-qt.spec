@@ -38,7 +38,7 @@ QT_QPA_PLATFORM=minimal LD_LIBRARY_PATH=../src GSETTINGS_BACKEND=memory GSETTING
 
 %install
 %make_install INSTALL_ROOT=%{buildroot}
-# Files under are part of coreutils and cpptest packages
+# Files underneath are part of coreutils and cpptest packages
 rm -rf %{buildroot}/usr/tests
 
 %files
@@ -46,12 +46,14 @@ rm -rf %{buildroot}/usr/tests
 %{_libdir}/libgsettings-qt.so.1
 %{_libdir}/libgsettings-qt.so.1.0
 %{_libdir}/libgsettings-qt.so.1.0.0
+%dir %{_libdir}/qt5/qml/GSettings.1.0
 %{_libdir}/qt5/qml/GSettings.1.0/libGSettingsQmlPlugin.so
 %{_libdir}/qt5/qml/GSettings.1.0/plugins.qmltypes
 %{_libdir}/qt5/qml/GSettings.1.0/qmldir
 
 %files devel
 %license COPYING
+%dir %{_includedir}/qt5/QGSettings
 %{_includedir}/qt5/QGSettings/QGSettings
 %{_includedir}/qt5/QGSettings/qgsettings.h
 %{_libdir}/libgsettings-qt.so
