@@ -12,12 +12,14 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] apparmor
 * [X] lomiri-url-dispatcher
 * [X] process-cpp
-* [X] lomiri-ui-toolkit
+* [X] lomiri-ui-toolkit (Ubuntu Compatibility needs to be added)
 * [X] qt5-mobility
 * [X] qt5-pim
 * [X] gsettings-qt
-* [] content-hub
+* [X] content-hub
 * [X] lomiri-download-manager
+* [] qtdbustest
+* [] qtdbusmock
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
