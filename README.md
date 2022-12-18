@@ -18,7 +18,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] gsettings-qt
 * [X] content-hub
 * [X] lomiri-download-manager
-* [] qtdbustest
+* [X] qtdbustest
 * [] qtdbusmock
 
 ### Extra applications/functionality for Lomiri:
