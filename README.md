@@ -3,6 +3,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 
 ## Created spec files list:
 ### Needed for Lomiri to build:
+* [] lomiri
 * [X] lomiri-api
 * [] qtmir
 * [X] click
@@ -19,10 +20,11 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] content-hub
 * [X] lomiri-download-manager
 * [X] qtdbustest
-* [] qtdbusmock
+* [X] qtdbusmock
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
+* [] lomiri-desktop-session
 
 ## Thanks To
 * [lomiri-on-fedora](https://gitlab.com/erlend.io/lomiri-on-fedora) for examples on how to build some RPMs

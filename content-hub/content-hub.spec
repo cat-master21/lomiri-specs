@@ -23,6 +23,7 @@ BuildRequires: pkgconfig(lomiri-app-launch-0)
 BuildRequires: pkgconfig(liblomiri-api)
 BuildRequires: pkgconfig(gsettings-qt)
 BuildRequires: pkgconfig(lomiri-download-manager-client)
+Requires:      lomiri-ui-toolkit
 
 %description
 content sharing/picking service
