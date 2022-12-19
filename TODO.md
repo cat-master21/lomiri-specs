@@ -6,4 +6,5 @@
 
 # Todo in general
 * [] Test tests and packages
+	* [] Add stuff to %postrans and %check
 * [] Fix descriptions and possibly patches for some packages

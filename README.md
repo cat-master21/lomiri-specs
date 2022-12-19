@@ -24,10 +24,13 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] geonames
 * [X] qmenumodel
 * [X] deviceinfo
+* [X] lomiri-system-settings
+* [] lomiri-indicator-network
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
 * [] lomiri-desktop-session
+* [] suru-icon-theme
 
 ## Thanks To
 * [lomiri-on-fedora](https://gitlab.com/erlend.io/lomiri-on-fedora) for examples on how to build some RPMs
