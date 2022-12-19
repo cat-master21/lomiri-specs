@@ -5,7 +5,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 ### Needed for Lomiri to build:
 * [] lomiri
 * [X] lomiri-api
-* [] qtmir
+* [X] qtmir
 * [X] click
 * [X] lomiri-app-launch
 * [X] dbus-test-runner
@@ -13,7 +13,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] apparmor
 * [X] lomiri-url-dispatcher
 * [X] process-cpp
-* [X] lomiri-ui-toolkit (Ubuntu Compatibility needs to be added)
+* [X] lomiri-ui-toolkit
 * [X] qt5-mobility
 * [X] qt5-pim
 * [X] gsettings-qt
