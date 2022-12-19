@@ -5,7 +5,7 @@
 
 Name:           apparmor
 Version:        3.1.2
-Release:        0.1%{?dist}
+Release:        1%{?dist}
 Summary:        AppArmor userspace components
 
 %define baseversion %(echo %{version} | cut -d. -f-2)

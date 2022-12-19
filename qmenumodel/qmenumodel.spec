@@ -32,7 +32,7 @@ developing applications that use %{name}.
 %autosetup -n qmenumodel-%{version}
 
 %build
-%cmake
+%cmake -DENABLE_TESTS=ON -DENABLE_COVERAGE=ON
 %cmake_build
 
 %install

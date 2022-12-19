@@ -23,6 +23,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] qtdbusmock
 * [X] geonames
 * [X] qmenumodel
+* [X] deviceinfo
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
