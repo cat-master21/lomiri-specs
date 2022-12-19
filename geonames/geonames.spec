@@ -45,15 +45,18 @@ The %{name}-doc package contains documenation for %{name}.
 %find_lang %{name}
 
 %files -f %{name}.lang
+%license COPYING COPYING.data
 %{_libdir}/libgeonames.so.*
 
 %files devel
+%license COPYING
 %dir %{_includedir}/geonames
 %{_includedir}/geonames/geonames.h
 %{_libdir}/libgeonames.so
 %{_libdir}/pkgconfig/geonames.pc
 
 %files doc
+%license COPYING
 %dir %{_datadir}/gtk-doc/html/geonames
 %{_datadir}/gtk-doc/html/geonames/*.html
 %{_datadir}/gtk-doc/html/geonames/*.png
