@@ -70,24 +70,17 @@ Requires: qt5-qtdeclarative-devel
 Examples for Lomiri-ui-toolkit.
 
 %prep
-%setup -q -n lomiri-ui-toolkit-main
+%autosetup -n lomiri-ui-toolkit-main
 
 %build
-mkdir redhat-linux-build
-cd ./redhat-linux-build
-%{qmake_qt5} ..
+%{qmake_qt5} 'CONFIG+=ubuntu-uitk-compat' 'CONFIG+=test'
 
 %make_build
-ln -s ../redhat-linux-build/app-launch-profiler/lomiri-app-launch-tracepoints ../app-launch-profiler/lomiri-app-launch-tracepoints
-ln -s ../redhat-linux-build/lomiri-ui-toolkit-launcher/lomiri-ui-toolkit-launcher ../lomiri-ui-toolkit-launcher/lomiri-ui-toolkit-launcher
-ln -s ../redhat-linux-build/apicheck/apicheck ../apicheck/apicheck
 
 %install
-cd ./redhat-linux-build
 %make_install INSTALL_ROOT=%{buildroot} STRIP=/bin/true
 # Used by apicheck during tests only
 rm -rf %{buildroot}%{_qt5_qmldir}/Extinct
-cd ../
 %find_lang %{name}
 %find_lang %{name}-gallery
 
@@ -106,6 +99,12 @@ cd ../
 %{_qt5_qmldir}/Lomiri/Metrics/
 %{_qt5_qmldir}/Lomiri/PerformanceMetrics/
 %{_qt5_qmldir}/Lomiri/Test/
+%dir %{_qt5_qmldir}/Ubuntu
+%{_qt5_qmldir}/Ubuntu/Components/
+%{_qt5_qmldir}/Ubuntu/Layouts/
+%{_qt5_qmldir}/Ubuntu/Metrics/
+%{_qt5_qmldir}/Ubuntu/PerformanceMetrics/
+%{_qt5_qmldir}/Ubuntu/Test/
 %{_bindir}/lomiri-*
 
 
