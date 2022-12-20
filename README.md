@@ -28,11 +28,17 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] lomiri-settings-components
 * [] lomiri-indicator-network
 * [] qofono
+* [X] lomiri-schemas
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
 * [] lomiri-desktop-session
 * [] suru-icon-theme
+* [] ubuntu-sdk
+* [] Fix some sections of lomiri-system-settings
+	* [] lomiri-keyboard
+	* [] lomiri-system-settings-*
+	* [] ayatana-indicator-datetime
 
 ## Thanks To
 * [lomiri-on-fedora](https://gitlab.com/erlend.io/lomiri-on-fedora) for examples on how to build some RPMs
