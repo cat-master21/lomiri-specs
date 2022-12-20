@@ -3,7 +3,7 @@
 Name:       lomiri-system-settings
 Version:    0.1
 Release:    1%{?dist}
-Summary:    The System Settings application for Lomiri
+Summary:    The system settings application for Lomiri
 License:    GPLv3
 URL:        https://gitlab.com/ubports/development/core/lomiri-system-settings
 Source0:    %{url}/-/archive/main/lomiri-system-settings-main.tar.gz
@@ -18,6 +18,7 @@ BuildRequires: pkgconfig(icu-i18n)
 BuildRequires: pkgconfig(click-0.4)
 BuildRequires: pkgconfig(gsettings-qt)
 BuildRequires: pkgconfig(QtGui)
+Requires:      lomiri-settings-components
 
 %description
 The system settings application (and library) for the Lomiri desktop enviroment.

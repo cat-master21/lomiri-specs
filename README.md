@@ -25,7 +25,9 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] qmenumodel
 * [X] deviceinfo
 * [X] lomiri-system-settings
+* [X] lomiri-settings-components
 * [] lomiri-indicator-network
+* [] qofono
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
