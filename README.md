@@ -3,7 +3,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 
 ## Created spec files list:
 ### Needed for Lomiri to build:
-* [] lomiri
+* [X] lomiri
 * [X] lomiri-api
 * [X] qtmir
 * [X] click
