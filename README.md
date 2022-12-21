@@ -30,6 +30,8 @@ Lomiri/Unity8 RPM spec files for Fedora
 * [X] qofono
 * [X] lomiri-schemas
 * [X] gmenuharness
+* [] libusermetrics
+* [X] qdjango
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
