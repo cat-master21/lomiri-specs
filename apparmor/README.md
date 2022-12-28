@@ -1,2 +1,2 @@
 ## Apparmor
-### Thanks to [gloriouseggroll copr apparmor package](https://copr.fedorainfracloud.org/coprs/gloriouseggroll/apparmor-testing-maybe/package/apparmor/) for mostly providing this package
+### Thanks to [gloriouseggroll apparmor package](https://copr.fedorainfracloud.org/coprs/gloriouseggroll/apparmor-testing-maybe/package/apparmor/) for providing most of this.

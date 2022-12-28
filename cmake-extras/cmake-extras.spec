@@ -4,7 +4,7 @@ Name:       cmake-extras
 Version:    1.0
 Release:    1%{?dist}
 Summary:    A collection of add-ons for the CMake build tool.
-License:    GPL
+License:    GPLv3
 URL:        https://github.com/ubports/cmake-extras
 Source0:    https://github.com/ubports/cmake-extras/archive/f6b455df21fa483388a79db6366707310d68167e/cmake-extras.tar.gz
 Source1:    https://gitlab.com/erlend.io/lomiri-on-fedora/-/raw/master/lomiri-cmake-extras/GMockConfig.cmake

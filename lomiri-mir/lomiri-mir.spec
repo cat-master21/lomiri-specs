@@ -20,7 +20,7 @@ Summary:        Next generation display server (Lomiri version)
 License:        (GPLv2 or GPLv3) and (LGPLv2 or LGPLv3)
 URL:            https://mir-server.io/
 Source0:        https://github.com/MirServer/mir/archive/refs/heads/release/1.8.tar.gz
-Source1:        https://gitlab.com/ubports/development/core/packaging/mir/-/archive/fix_gcc11/mir-fix_gcc11.tar.gz
+Source1:        https://gitlab.com/ubports/development/core/packaging/mir/-/archive/ubports/focal/mir-ubports-focal.tar.gz
 Patch0:         0007-temp-fix-for-removed-declaration-in-EGL-eglmesaext.h.patch
 
 
@@ -199,21 +199,21 @@ Mir unit and integration tests.
 # Apply Lomiri specific patches
 tar -xf '%{SOURCE1}'
 #for i in mir-fix_gcc11/debian/patches/*.patch; do patch -p1 < $i; done
-for i in mir-fix_gcc11/debian/patches/ubports/*.patch; do patch -p1 < $i; done
+for i in mir-ubports-focal/debian/patches/ubports/*.patch; do patch -p1 < $i; done
 
 # Drop -Werror
 sed -e "s/-Werror//g" -i CMakeLists.txt
 
 %build
 
-%cmake	-GNinja %{?with_lto:-DMIR_LINK_TIME_OPTIMIZATION=ON} \
-	-DMIR_USE_PRECOMPILED_HEADERS=OFF \
-	-DCMAKE_INSTALL_LIBEXECDIR="usr/libexec/mir" \
-	-DMIR_EGL_SUPPORTED=ON \
-	-DMIR_FATAL_COMPILE_WARNINGS=OFF \
-	-DMIR_RUN_INTEGRATION_TESTS=OFF \
-	-DMIR_BUILD_UNIT_TESTS=OFF \
-	-DMIR_PLATFORM="mesa-kms;mesa-x11;wayland;eglstream-kms"
+%cmake  -GNinja %{?with_lto:-DMIR_LINK_TIME_OPTIMIZATION=ON} \
+        -DMIR_USE_PRECOMPILED_HEADERS=OFF \
+        -DCMAKE_INSTALL_LIBEXECDIR="usr/libexec/mir" \
+        -DMIR_EGL_SUPPORTED=ON \
+        -DMIR_FATAL_COMPILE_WARNINGS=OFF \
+        -DMIR_RUN_INTEGRATION_TESTS=OFF \
+        -DMIR_BUILD_UNIT_TESTS=OFF \
+        -DMIR_PLATFORM="mesa-kms;mesa-x11;wayland;eglstream-kms"
 
 cmake --build redhat-linux-build -j$(nproc)
 
@@ -231,7 +231,6 @@ popd
 
 # Nothing outside Mir should link to libmirprotobuf directly.
 rm -fv %{buildroot}%{_libdir}/libmirprotobuf.so
-
 
 %check
 %if %{with run_tests}
@@ -328,6 +327,5 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/miral-shell.desktop
 %license COPYING.GPL*
 %doc README.md
 %{_libdir}/libmir-test-assist.a
-
 
 %changelog

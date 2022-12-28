@@ -1,0 +1,191 @@
+name: build all RPMs
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora
+      volumes:
+        - /proc:/proc
+      options: --privileged -it
+      env:
+        shell: bash
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: dnf install -y rpmdevtools rpm-build dnf-utils mock
+
+    - name: Download RPM Sources
+      run: |
+        rpmdev-setuptree
+        for i in ./*/*.spec
+        do
+        spectool -R -g $i 2> /dev/null &
+        done
+        wait
+    - name: Build cmake-extras
+      run: |
+        dnf builddep -y --spec ./cmake-extras/cmake-extras.spec
+        rpmbuild --nodebuginfo -bb ./cmake-extras/cmake-extras.spec
+    - name: Build qofono
+      run: |
+        dnf builddep -y --spec ./qofono/qofono.spec
+        rpmbuild --nodebuginfo -bb ./qofono/qofono.spec
+    - name: Build properties-cpp-devel
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./properties-cpp-devel/properties-cpp-devel.spec
+        rpmbuild --nodebuginfo -bb ./properties-cpp-devel/properties-cpp-devel.spec
+    - name: Build lomiri-schemas
+      run: |
+        dnf builddep -y --spec ./lomiri-schemas/lomiri-schemas.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-schemas/lomiri-schemas.spec
+    - name: Build lomiri-mir
+      run: |
+        cp lomiri-mir/*.patch ~/rpmbuild/SOURCES
+        dnf builddep -y --spec ./lomiri-mir/lomiri-mir.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-mir/lomiri-mir.spec
+    - name: Build lomiri-api
+      run: |
+        dnf builddep -y --spec ./lomiri-api/lomiri-api.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-api/lomiri-api.spec
+    - name: Build click
+      run: |
+        dnf builddep -y --spec ./click/click.spec
+        rpmbuild --nodebuginfo -bb ./click/click.spec
+    - name: Build apparmor
+      run: |
+        cp apparmor/*.patch ~/rpmbuild/SOURCES
+        cp apparmor/apparmor.preset ~/rpmbuild/SOURCES
+        dnf builddep -y --spec ./apparmor/apparmor.spec
+        rpmbuild --nodebuginfo -bb ./apparmor/apparmor.spec
+    - name: Build dbus-test-runner
+      run: |
+        dnf builddep -y --spec ./dbus-test-runner/dbus-test-runner.spec
+        rpmbuild --nodebuginfo -bb ./dbus-test-runner/dbus-test-runner.spec
+    - name: Build deviceinfo
+      run: |
+        dnf builddep -y --spec ./deviceinfo/deviceinfo.spec
+        rpmbuild --nodebuginfo -bb ./deviceinfo/deviceinfo.spec
+    - name: Build geonames
+      run: |
+        dnf builddep -y --spec ./geonames/geonames.spec
+        rpmbuild --nodebuginfo -bb ./geonames/geonames.spec
+    - name: Build qtdbustest.spec
+      run: |
+        dnf builddep -y --spec ./qtdbustest/qtdbustest.spec
+        rpmbuild --nodebuginfo -bb ./qtdbustest/qtdbustest.spec
+    - name: Build qt5-mobility
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./qt5-mobility/qt5-mobility.spec
+        rpmbuild -bs ./qt5-mobility/qt5-mobility.spec
+        mock ~/rpmbuild/SRPMS/qt5-mobility-*.src.rpm --resultdir=./qt5-mobility
+        mv qt5-mobility/*$(rpm --eval '%{_arch}').rpm ~/rpmbuild/RPMS/$(rpm --eval '%{_arch}')
+        mv qt5-mobility/*noarch.rpm ~/rpmbuild/RPMS/noarch
+# Fails sayinga file is missing but it is not for documentation
+#        rpmbuild --nodebuginfo -bb ./qt5-mobility/qt5-mobility.spec
+    - name: Build qt5-pim
+      run: |
+        dnf builddep -y --spec ./qt5-pim/qt5-pim.spec
+        rpmbuild -bs ./qt5-pim/qt5-pim.spec
+        mock ~/rpmbuild/SRPMS/qt5-pim-*.src.rpm --resultdir=./qt5-pim
+        mv qt5-pim/*$(rpm --eval '%{_arch}').rpm ~/rpmbuild/RPMS/$(rpm --eval '%{_arch}')
+        mv qt5-pim/*noarch.rpm ~/rpmbuild/RPMS/noarch
+        rm -rf ~/rpmbuild/RPMS/$(rpm --eval '%{_arch}')/*debug*.rpm
+#        rpmbuild --nodebuginfo -bb ./qt5-pim/qt5-pim.spec
+    - name: Build gmenuharness
+      run: |
+        dnf builddep -y --spec ./gmenuharness/gmenuharness.spec
+        rpmbuild --nodebuginfo -bb ./gmenuharness/gmenuharness.spec
+    - name: Build qmenumodel
+      run: |
+        dnf builddep -y --spec ./qmenumodel/qmenumodel.spec
+        rpmbuild --nodebuginfo -bb ./qmenumodel/qmenumodel.spec
+    - name: Build process-cpp
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./process-cpp/process-cpp.spec
+        rpmbuild --nodebuginfo -bb ./process-cpp/process-cpp.spec
+    - name: Build qtdbusmock
+      run: |
+        dnf builddep -y --spec ./qtdbusmock/qtdbusmock.spec
+        rpmbuild --nodebuginfo -bb ./qtdbusmock/qtdbusmock.spec
+    - name: Build qdjango
+      run: |
+        dnf builddep -y --spec ./qdjango/qdjango.spec
+        rpmbuild --nodebuginfo -bb ./qdjango/qdjango.spec
+    - name: Build lomiri-app-launch
+      run: |
+        dnf builddep -y --spec ./lomiri-app-launch/lomiri-app-launch.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-app-launch/lomiri-app-launch.spec
+    - name: Build lomiri-ui-toolkit
+      run: |
+        dnf builddep -y --spec ./lomiri-ui-toolkit/lomiri-ui-toolkit.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-ui-toolkit/lomiri-ui-toolkit.spec
+    - name: Build lomiri-url-dispatcher
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./lomiri-url-dispatcher/lomiri-url-dispatcher.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-url-dispatcher/lomiri-url-dispatcher.spec
+    - name: Build gsettings-qt
+      run: |
+        dnf builddep -y --spec ./gsettings-qt/gsettings-qt.spec
+        rpmbuild --nodebuginfo -bb ./gsettings-qt/gsettings-qt.spec
+    - name: Build lomiri-download-manager
+      run: |
+        dnf builddep -y --spec ./lomiri-download-manager/lomiri-download-manager.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-download-manager/lomiri-download-manager.spec
+    - name: Build content-hub
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./content-hub/content-hub.spec
+        rpmbuild --nodebuginfo -bb ./content-hub/content-hub.spec
+    - name: Build libusermetrics
+      run: |
+        dnf builddep -y --spec ./libusermetrics/libusermetrics.spec
+        rpmbuild --nodebuginfo -bb ./libusermetrics/libusermetrics.spec
+    - name: Build lomiri-settings-components
+      run: |
+        dnf builddep -y --spec ./lomiri-settings-components/lomiri-settings-components.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-settings-components/lomiri-settings-components.spec
+    - name: Build lomiri-system-settings
+      run: |
+        dnf builddep -y --spec ./lomiri-system-settings/lomiri-system-settings.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-system-settings/lomiri-system-settings.spec
+    - name: Build qtmir
+      run: |
+        dnf builddep -y --spec ./qtmir/qtmir.spec
+        rpmbuild --nodebuginfo -bb ./qtmir/qtmir.spec
+    - name: Build suru-icon-theme
+      run: |
+        dnf builddep -y --spec ./suru-icon-theme/suru-icon-theme.spec
+        rpmbuild --nodebuginfo -bb ./suru-icon-theme/suru-icon-theme.spec
+    - name: Build lomiri-indicator-network
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./lomiri-indicator-network/lomiri-indicator-network.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-indicator-network/lomiri-indicator-network.spec
+    - name: Build lomiri
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./lomiri/lomiri.spec
+        rpmbuild --nodebuginfo -bb ./lomiri/lomiri.spec
+    - name: Build lomiri-system-compositor
+      run: |
+        dnf builddep -y --spec ./lomiri-system-compositor/lomiri-system-compositor.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-system-compositor/lomiri-system-compositor.spec
+    - name: Build lomiri-desktop-session
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*
+        dnf builddep -y --spec ./lomiri-desktop-session/lomiri-desktop-session.spec
+        rpmbuild --nodebuginfo -bb ./lomiri-desktop-session/lomiri-desktop-session.spec
+
+    - name: Upload RPMs
+      if: success() || failure()
+      uses: actions/upload-artifact@v3.1.0
+      with:
+          name: Built-RPMS
+          path: ~/rpmbuild/RPMS/*/*

@@ -35,13 +35,15 @@ Trace/breakpoint trap
 * [X] qofono
 * [X] lomiri-schemas
 * [X] gmenuharness
-* [] libusermetrics
+* [X] libusermetrics
 * [X] qdjango
 
 ### Extra applications/functionality for Lomiri:
 * [] lomiri-terminal
-* [] lomiri-desktop-session
-* [] suru-icon-theme
+* [X] lomiri-system-compositor
+* [] ubuntu-touch-session
+* [X] lomiri-desktop-session
+* [X] suru-icon-theme
 * [] ubuntu-sdk
 * [] Fix some sections of lomiri-system-settings
 	* [] lomiri-keyboard

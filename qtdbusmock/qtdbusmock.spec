@@ -29,8 +29,8 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-%setup -n libqtdbusmock-xenial
-# Revert this so the patch can be applied
+%setup -q -n libqtdbusmock-xenial
+# Revert this so the patch can be applied with other fixes
 sed -i 's/libnm/NetworkManager/' CMakeLists.txt 
 %patch0 -p1
 

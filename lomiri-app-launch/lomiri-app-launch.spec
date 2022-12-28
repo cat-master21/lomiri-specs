@@ -9,8 +9,7 @@ Summary:        Provides the Lomiri App Launch user space daemon
 
 License:        GPLv3+
 URL:            https://gitlab.com/ubports/development/core/lomiri-app-launch
-Source0:        https://gitlab.com/cat-master21/lomiri-app-launch/-/archive/cat-master21-main-patch-82762/lomiri-app-launch-cat-master21-main-patch-82762.tar.gz
-#Source0:        {url}/-/archive/main/lomiri-app-launch-main.tar.gz
+Source0:        %{url}/-/archive/main/lomiri-app-launch-main.tar.gz
 
 BuildRequires: cmake
 BuildRequires: pkgconfig
@@ -48,7 +47,7 @@ This package contains development files needed for lomiri-app-launch.
 
 
 %prep
-%setup -q -n lomiri-app-launch-cat-master21-main-patch-82762
+%setup -q -n lomiri-app-launch-main
 
 %build
 for i in $(grep -r lib/@LOMIRI_APP_LAUNCH_ARCH@ --files-with-matches)

@@ -13,10 +13,9 @@ Summary:        AppArmor userspace components
 License:        GPL-2.0
 URL:            https://launchpad.net/apparmor
 Source0:        %{url}/%{baseversion}/%{version}/+download/%{name}-%{version}.tar.gz
-Source10:       https://copr-dist-git.fedorainfracloud.org/cgit/gloriouseggroll/apparmor-testing-maybe/apparmor.git/plain/%{name}.preset
-Patch01:	https://copr-dist-git.fedorainfracloud.org/cgit/gloriouseggroll/apparmor-testing-maybe/apparmor.git/plain/0001-fix-avahi-daemon-authselect-denial-in-fedora.patch
-Patch02:	https://copr-dist-git.fedorainfracloud.org/cgit/gloriouseggroll/apparmor-testing-maybe/apparmor.git/plain/0001-All-current-versions-of-RHEL-and-Fedora-that-are-not.patch
-#?h=f36
+Source1:        https://copr-dist-git.fedorainfracloud.org/cgit/gloriouseggroll/apparmor-testing-maybe/apparmor.git/plain/%{name}.preset
+Patch01:        https://copr-dist-git.fedorainfracloud.org/cgit/gloriouseggroll/apparmor-testing-maybe/apparmor.git/plain/0001-fix-avahi-daemon-authselect-denial-in-fedora.patch
+Patch02:        https://copr-dist-git.fedorainfracloud.org/cgit/gloriouseggroll/apparmor-testing-maybe/apparmor.git/plain/0001-All-current-versions-of-RHEL-and-Fedora-that-are-not.patch
 
 BuildRequires:  gcc
 BuildRequires:  automake
@@ -34,6 +33,8 @@ BuildRequires:  gettext
 BuildRequires:  pam-devel
 BuildRequires:  httpd-devel
 BuildRequires:  systemd-rpm-macros
+BuildRequires:  gawk
+BuildRequires:  which
 %if %{with tests}
 BuildRequires:  %{_bindir}/runtest
 BuildRequires:  %{_bindir}/prove
@@ -58,17 +59,17 @@ addition to the kernel's regular access control mechanisms (including DAC) and
 can be used to restrict the superuser.
 
 
-%package        libs
-Summary:        AppArmor library
+%package      libs
+Summary:      AppArmor library
 
-%description    libs
+%description  libs
 This package contains the shared library used for making use of the AppArmor
 profile and changehat functionality, as well as common log parsing routines.
 
 
-%package        devel
-Summary:        AppArmor development libraries and header files
-Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+%package       devel
+Summary:       AppArmor development libraries and header files
+Requires:      %{name}-libs%{?_isa} = %{version}-%{release}
 
 %description    devel
 This package contains AppArmor development libraries and header files.
@@ -118,7 +119,7 @@ program profiles to the AppArmor Security kernel module.
 %package        utils
 Summary:        AppArmor User-Level Utilities
 Requires:       python3-apparmor = %{version}
-Requires:	python3-notify2
+Requires:       python3-notify2
 
 %description    utils
 This package provides the aa-logprof, aa-genprof, aa-autodep,
@@ -187,7 +188,7 @@ popd
 %make_install -C changehat/mod_apparmor
 %make_install -C utils/vim
 
-install -Dm644 %{SOURCE10} %{buildroot}%{_presetdir}/70-apparmor.preset
+install -Dm644 %{SOURCE1} %{buildroot}%{_presetdir}/70-apparmor.preset
 
 find %{buildroot} \( -name "*.a" -o -name "*.la" \) -delete
 

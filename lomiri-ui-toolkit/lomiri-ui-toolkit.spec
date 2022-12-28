@@ -22,6 +22,7 @@ BuildRequires: qt5-qtfeedback
 BuildRequires: qt5-mobility-devel
 BuildRequires: qt5-pim-devel
 BuildRequires: python3-rpm-macros
+BuildRequires: qt5-qtsvg-devel
 Requires:      qt5-qtgraphicaleffects
 Requires:      qt5-qtfeedback
 

@@ -8,6 +8,7 @@ Summary:        A small library for handling URLs over dbus
 License:        LGPLv3+
 URL:            https://gitlab.com/ubports/development/core/click
 Source0:        %{url}/-/archive/%{version}/click-%{version}.tar.gz
+Patch0:         https://gitlab.com/ubports/development/core/click/-/commit/d5aa4b8ce02308fd27b8773cc2b69bac0c2652ec.diff
 
 BuildRequires: automake libtool
 BuildRequires: pkgconfig
@@ -22,7 +23,7 @@ BuildRequires: vala
 BuildRequires: python3-devel
 BuildRequires: python3-sphinx
 BuildRequires: systemd-rpm-macros
-
+BuildRequires: systemd
 
 %description
 Click is a app building method.
@@ -49,7 +50,7 @@ BuildArch: noarch
 Provides HTML and Manpage (documentation) for Click.
 
 %prep
-%setup -q -n click-%{version}
+%autosetup -n click-%{version}
 
 %build
 NOCONFIGURE=1 \

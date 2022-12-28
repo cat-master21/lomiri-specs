@@ -15,6 +15,7 @@ BuildRequires: g++
 BuildRequires: gcc
 BuildRequires: pkgconfig(glib-2.0)
 BuildRequires: doxygen
+BuildRequires: cmake-extras
 
 
 %description

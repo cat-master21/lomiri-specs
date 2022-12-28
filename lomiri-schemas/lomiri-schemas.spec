@@ -7,10 +7,12 @@ Summary:    Configuration schemas for lomiri
 License:    LGPLv2+
 URL:        https://gitlab.com/ubports/development/core/lomiri-schemas
 Source0:    %{url}/-/archive/main/lomiri-schemas-main.tar.gz
-BuildArch: noarch
+BuildArch:  noarch
 
 BuildRequires: cmake
 BuildRequires: gcc-c++
+BuildRequires: gettext
+BuildRequires: intltool
 
 %description
 Configuration schemas for lomiri.

@@ -12,6 +12,9 @@ Source1: https://salsa.debian.org/qt-kde-team/qt/qtpim/-/archive/master/qtpim-ma
 
 BuildRequires: make
 BuildRequires: gcc-c++
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtbase-private-devel
+BuildRequires: qt5-qtdeclarative-devel
 BuildRequires: pkgconfig(QtCore)
 BuildRequires: perl
 BuildRequires: qt5-doctools
@@ -30,7 +33,6 @@ Provides: %{name}-sensors = %{version}-%{release}
 Provides: %{name}-serviceframework = %{version}-%{release}
 Provides: %{name}-systeminfo = %{version}-%{release}
 Provides: %{name}-versit = %{version}-%{release}
-
 
 %description
 Qt Mobility Project delivers a set of new APIs to Qt with features that are well
@@ -62,7 +64,6 @@ Provides: %{name}-versit-devel = %{version}-%{release}
 
 %package doc
 Summary: API documentation for %{name}
-Requires: qt5
 BuildArch: noarch
 %description doc
 %{summary}.
@@ -73,12 +74,10 @@ Requires: %{name}-devel
 %description examples
 %{summary}.
 
-
 %prep
 %autosetup -n qtpim-kde-%{version}
 tar -xf '%{SOURCE1}'
 for i in qtpim-master/debian/patches/*.patch; do patch -p1 < $i; done
-mkdir .git
 
 %build
 PATH=%{_qt5_bindir}:$PATH; export PATH
@@ -103,23 +102,16 @@ cd ../QtVersitOrganizer
 ln -s 5.4.0/QtVersitOrganizer/private
 cd ../../../
 
-# Fails to build qmake complains out-of-source build? Fix later
-#sed -i '/organizer/d' examples/examples.pro
-#export CXXFLAGS="%{optflags} -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H"
 cd ./redhat-linux-build
-qmake-qt5 -d ..
+qmake-qt5 ..
 
 %make_build
-
 %make_build docs
-
 
 %install
 cd ./redhat-linux-build
 make INSTALL_ROOT=%{buildroot} install STRIP=/bin/true
 
-# Did not install examples so empty directory
-#rm -rf %{buildroot}%{_qt5_examplesdir}
 # manually install docs
 mkdir -p %{buildroot}%{_qt5_docdir}/html/ %{buildroot}%{_qt5_docdir}/qch/
 mv doc/*.qch %{buildroot}%{_qt5_docdir}/qch/

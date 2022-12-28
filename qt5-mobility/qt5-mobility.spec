@@ -7,7 +7,7 @@ Release: 1%{?dist}
 
 License: GPLv3 with exceptions
 URL:     https://invent.kde.org/qt/qt/qtsystems
-Source0: https://invent.kde.org/qt/qt/qtsystems/-/archive/dev/qtsystems-dev.tar.gz
+Source0: %{url}/-/archive/dev/qtsystems-dev.tar.gz
 Source1: https://salsa.debian.org/qt-kde-team/qt/qtsystems/-/archive/master/qtsystems-master.tar.gz
 
 BuildRequires: make
@@ -23,9 +23,12 @@ BuildRequires: pkgconfig(QtDeclarative)
 BuildRequires: pkgconfig(QtGui) pkgconfig(QtOpenGL)
 BuildRequires: pkgconfig(QtNetwork) >= 4.7
 BuildRequires: pkgconfig(xv)
-BuildRequires: perl
 BuildRequires: qt5-doctools
+BuildRequires: qt5-qtdeclarative-devel
 BuildRequires: qt5-rpm-macros
+BuildRequires: qt5-qtbase-private-devel
+BuildRequires: qt5-qtbase
+BuildRequires: gcc-%{_arch}-linux-gnu
 
 Provides: %{name}-bearer = %{version}-%{release}
 Provides: %{name}-connectivity = %{version}-%{release}
@@ -72,7 +75,6 @@ Provides: %{name}-versit-devel = %{version}-%{release}
 
 %package doc
 Summary: API documentation for %{name}
-Requires: qt5
 BuildArch: noarch
 %description doc
 %{summary}.
@@ -83,15 +85,13 @@ Requires: %{name}-devel
 %description examples
 %{summary}.
 
-
 %prep
 %autosetup -n qtsystems-dev
 tar -xf '%{SOURCE1}'
 for i in qtsystems-master/debian/patches/*.patch; do patch -p1 < $i; done
-mkdir .git
+#mkdir .git
 
 %build
-PATH=%{_qt5_bindir}:$PATH; export PATH
 # Build headers manually
 cd src/systeminfo/ && perl /usr/bin/syncqt.pl -module QtSystemInfo -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
@@ -110,12 +110,10 @@ ln -s 5.4.0/QtSystemInfo/private
 cd ../../../
 
 cd ./redhat-linux-build
-qmake-qt5 -d ..
+%qmake_qt5 ..
 
 %make_build
-
 %make_build docs
-
 
 %install
 cd ./redhat-linux-build
@@ -128,6 +126,11 @@ cp -a doc/* %{buildroot}%{_qt5_docdir}/html/
 
 # Is not needed/out of source
 rm -f %{buildroot}%{_qt5_examplesdir}/examples.pro
+# Happens in mock but not rpmbuild? Only happens in _buildrootdir/lib64/qt5/mkspecs/modules/*pri
+mv -f %{_buildrootdir}/%{_lib}/qt5/* %{buildroot}%{_qt5_archdatadir} || true
+rm -rf %{_buildrootdir}/%{_lib} || true
+# manually install headers
+#cp -a ./include/* %{buildroot}%{_qt5_includedir}
 
 %files
 %license LICENSE.GPL2 LICENSE.GPL3 LICENSE.GPL3-EXCEPT
@@ -181,6 +184,5 @@ rm -f %{buildroot}%{_qt5_examplesdir}/examples.pro
 %{_qt5_examplesdir}/systeminfo/qml-battery/
 %{_qt5_examplesdir}/systeminfo/qml-deviceinfo/
 %{_qt5_examplesdir}/systeminfo/qml-inputinfo/
-
 
 %changelog
