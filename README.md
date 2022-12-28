@@ -1,5 +1,10 @@
 # lomiri-specs
 Lomiri/Unity8 RPM spec files for Fedora
+**Currently this fails with:**
+```
+(process:15757): GLib-GIO-ERROR **: 20:57:15.067: Settings schema 'com.lomiri.keyboard.maliit' is not installed
+Trace/breakpoint trap
+```
 
 ## Created spec files list:
 ### Needed for Lomiri to build:
