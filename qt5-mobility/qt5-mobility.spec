@@ -5,7 +5,7 @@ Summary: Qt5 Mobility Framework
 Version: 5.15
 Release: 1%{?dist}
 
-License: GPLv3 with exceptions
+License: GPLv3
 URL:     https://invent.kde.org/qt/qt/qtsystems
 Source0: %{url}/-/archive/dev/qtsystems-dev.tar.gz
 Source1: https://salsa.debian.org/qt-kde-team/qt/qtsystems/-/archive/master/qtsystems-master.tar.gz
@@ -29,7 +29,6 @@ BuildRequires: qt5-qtdeclarative-devel
 BuildRequires: qt5-rpm-macros
 BuildRequires: qt5-qtbase-private-devel
 BuildRequires: qt5-qtbase
-BuildRequires: gcc-%{_arch}-linux-gnu
 
 Provides: %{name}-bearer = %{version}-%{release}
 Provides: %{name}-connectivity = %{version}-%{release}

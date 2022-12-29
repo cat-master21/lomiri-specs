@@ -6,7 +6,7 @@ Lomiri/Unity8 RPM spec files for Fedora
 Trace/breakpoint trap
 ```
 
-##Lomiri RPM list:
+## Lomiri RPM list:
 ### Core Packages
 * [X] lomiri
 * [X] lomiri-api
@@ -37,8 +37,7 @@ Trace/breakpoint trap
 * [X] gmenuharness
 * [X] libusermetrics
 * [X] qdjango
-* [] lomiri-keyboard
-* [] maliit-framework
+* [X] lomiri-keyboard
 
 ### Core App Packages
 * [] lomiri-terminal-app
@@ -65,3 +64,4 @@ Trace/breakpoint trap
 
 ## Thanks To
 * [lomiri-on-fedora](https://gitlab.com/erlend.io/lomiri-on-fedora) for examples on how to build some RPMs
+* [pmaports](https://gitlab.com/ralf1307/pmaports/-/tree/feature%2Flomiri) for patches related to Lomiri
