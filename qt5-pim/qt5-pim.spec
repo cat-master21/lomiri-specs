@@ -82,13 +82,13 @@ for i in qtpim-master/debian/patches/*.patch; do patch -p1 < $i; done
 %build
 PATH=%{_qt5_bindir}:$PATH; export PATH
 # Build headers manually
-cd src/contacts/ && perl /usr/bin/syncqt.pl -module QtContacts -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd src/contacts/ && perl /usr/bin/syncqt.pl -copy -module QtContacts -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
-cd organizer/ && perl /usr/bin/syncqt.pl -module QtOrganizer -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd organizer/ && perl /usr/bin/syncqt.pl -copy -module QtOrganizer -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
-cd versit/ && perl /usr/bin/syncqt.pl -module QtVersit -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd versit/ && perl /usr/bin/syncqt.pl -copy -module QtVersit -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
-cd versitorganizer/ && perl /usr/bin/syncqt.pl -module QtVersitOrganizer -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd versitorganizer/ && perl /usr/bin/syncqt.pl -copy -module QtVersitOrganizer -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../../
 
 # For building
