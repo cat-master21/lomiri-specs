@@ -38,9 +38,12 @@ BuildRequires: pkgconfig(libusermetricsoutput-1)
 BuildRequires: pkgconfig(libsystemd)
 BuildRequires: dpkg-dev
 BuildRequires: systemd-rpm-macros
-Requires: lomiri-system-compositor
-Requires: suru-icon-theme
-Requires: lomiri-schemas
+Recommends:    lomiri-system-compositor
+Recommends:    lomiri-desktop-session
+Requires:      lomiri-ui-toolkit
+Requires:      lomiri-download-manager
+Requires:      suru-icon-theme
+Requires:      lomiri-schemas
 
 %description
 Lomiri, Previously Unity8 is a convergent desktop environment built with Qt.

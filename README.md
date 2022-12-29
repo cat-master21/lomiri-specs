@@ -6,8 +6,8 @@ Lomiri/Unity8 RPM spec files for Fedora
 Trace/breakpoint trap
 ```
 
-## Created spec files list:
-### Needed for Lomiri to build:
+##Lomiri RPM list:
+### Core Packages
 * [X] lomiri
 * [X] lomiri-api
 * [X] qtmir
@@ -37,16 +37,29 @@ Trace/breakpoint trap
 * [X] gmenuharness
 * [X] libusermetrics
 * [X] qdjango
+* [] lomiri-keyboard
+* [] maliit-framework
 
-### Extra applications/functionality for Lomiri:
-* [] lomiri-terminal
+### Core App Packages
+* [] lomiri-terminal-app
+* [] lomiri-filemanager-app
+* [] lomiri-clock-app
+* [] lomiri-calculator-app
+* [] lomiri-gallery-app
+* [] lomiri-music-app
+* [] ubports-app
+* [] lomiri-docviewer-app
+* [] lomiri-notes-app
+* [] lomiri-camera-app
+* [] morph-browser
+
+### Extra Functionality for Lomiri
 * [X] lomiri-system-compositor
 * [] ubuntu-touch-session
 * [X] lomiri-desktop-session
 * [X] suru-icon-theme
 * [] ubuntu-sdk
-* [] Fix some sections of lomiri-system-settings
-	* [] lomiri-keyboard
+* [] Extra functionality for lomiri-system-settings
 	* [] lomiri-system-settings-*
 	* [] ayatana-indicator-datetime
 

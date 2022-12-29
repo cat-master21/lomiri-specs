@@ -7,7 +7,7 @@ Release: 1%{?dist}
 
 License: GPLv3 with exceptions
 URL:     https://invent.kde.org/qt/qt/qtpim
-Source0: https://invent.kde.org/qt/qt/qtpim/-/archive/kde/5.15/qtpim-kde-%{version}.tar.gz
+Source0: %{url}/-/archive/kde/5.15/qtpim-kde-%{version}.tar.gz
 Source1: https://salsa.debian.org/qt-kde-team/qt/qtpim/-/archive/master/qtpim-master.tar.gz
 
 BuildRequires: make
@@ -173,6 +173,5 @@ cp -a doc/* %{buildroot}%{_qt5_docdir}/html/
 %dir %{_qt5_examplesdir}/contacts
 %{_qt5_examplesdir}/contacts/*.pro
 %{_qt5_examplesdir}/organizer/
-
 
 %changelog
