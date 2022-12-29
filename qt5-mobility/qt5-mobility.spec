@@ -23,6 +23,7 @@ BuildRequires: pkgconfig(QtDeclarative)
 BuildRequires: pkgconfig(QtGui) pkgconfig(QtOpenGL)
 BuildRequires: pkgconfig(QtNetwork) >= 4.7
 BuildRequires: pkgconfig(xv)
+BuildRequires: pkgconfig(QtDBus)
 BuildRequires: qt5-doctools
 BuildRequires: qt5-qtdeclarative-devel
 BuildRequires: qt5-rpm-macros
@@ -93,11 +94,11 @@ for i in qtsystems-master/debian/patches/*.patch; do patch -p1 < $i; done
 
 %build
 # Build headers manually
-cd src/systeminfo/ && perl /usr/bin/syncqt.pl -module QtSystemInfo -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd src/systeminfo/ && perl /usr/bin/syncqt.pl -copy -module QtSystemInfo -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
-cd publishsubscribe/ && perl /usr/bin/syncqt.pl -module QtPublishSubscribe -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd publishsubscribe/ && perl /usr/bin/syncqt.pl -copy -module QtPublishSubscribe -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../
-cd serviceframework/ && perl /usr/bin/syncqt.pl -module QtServiceFramework -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
+cd serviceframework/ && perl /usr/bin/syncqt.pl -copy -module QtServiceFramework -version 5.4.0 -outdir ../../redhat-linux-build -builddir ./ ./
 cd ../../
 
 # For building
@@ -130,7 +131,7 @@ rm -f %{buildroot}%{_qt5_examplesdir}/examples.pro
 mv -f %{_buildrootdir}/%{_lib}/qt5/* %{buildroot}%{_qt5_archdatadir} || true
 rm -rf %{_buildrootdir}/%{_lib} || true
 # manually install headers
-#cp -a ./include/* %{buildroot}%{_qt5_includedir}
+cp -a ./include/* %{buildroot}%{_qt5_includedir}
 
 %files
 %license LICENSE.GPL2 LICENSE.GPL3 LICENSE.GPL3-EXCEPT
