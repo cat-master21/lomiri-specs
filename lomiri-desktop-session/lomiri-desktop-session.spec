@@ -16,6 +16,7 @@ BuildRequires: inotify-tools
 BuildRequires: lomiri
 BuildRequires: lomiri-system-compositor
 BuildRequires: systemd-rpm-macros
+Recommends:    libayatana-common
 Requires:      dbus-common
 Requires:      inotify-tools
 Requires:      lomiri
