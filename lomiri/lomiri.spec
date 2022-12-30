@@ -40,6 +40,8 @@ BuildRequires: dpkg-dev
 BuildRequires: systemd-rpm-macros
 Recommends:    lomiri-system-compositor
 Recommends:    lomiri-desktop-session
+Requires:      lomiri-sounds
+Requires:      lomiri-keyboard
 Requires:      lomiri-ui-toolkit
 Requires:      lomiri-download-manager
 Requires:      suru-icon-theme

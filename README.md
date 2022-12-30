@@ -2,7 +2,7 @@
 Lomiri/Unity8 RPM spec files for Fedora
 **Currently this fails with:**
 ```
-(process:15757): GLib-GIO-ERROR **: 20:57:15.067: Settings schema 'com.lomiri.keyboard.maliit' is not installed
+(process:8082): GLib-GIO-ERROR **: 15:23:24.487: Settings schema 'org.ayatana.indicator.datetime' is not installed
 Trace/breakpoint trap
 ```
 
@@ -38,6 +38,10 @@ Trace/breakpoint trap
 * [X] libusermetrics
 * [X] qdjango
 * [X] lomiri-keyboard
+* [] ayatana-indicator-datetime
+* [X] lomiri-sounds
+* [] libayatana-common
+* [] ayatana-indicator-messages
 
 ### Core App Packages
 * [] lomiri-terminal-app
@@ -60,7 +64,6 @@ Trace/breakpoint trap
 * [] ubuntu-sdk
 * [] Extra functionality for lomiri-system-settings
 	* [] lomiri-system-settings-*
-	* [] ayatana-indicator-datetime
 
 ## Thanks To
 * [lomiri-on-fedora](https://gitlab.com/erlend.io/lomiri-on-fedora) for examples on how to build some RPMs

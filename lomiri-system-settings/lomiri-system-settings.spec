@@ -18,6 +18,8 @@ BuildRequires: pkgconfig(icu-i18n)
 BuildRequires: pkgconfig(click-0.4)
 BuildRequires: pkgconfig(gsettings-qt)
 BuildRequires: pkgconfig(QtGui)
+Recommends:    suru-icon-theme
+Requires:      ayatana-indicator-datetime
 Requires:      lomiri-settings-components
 
 %description
