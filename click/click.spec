@@ -3,8 +3,7 @@
 Name:           click
 Version:        0.5.0
 Release:        1%{?dist}
-Summary:        A small library for handling URLs over dbus
-
+Summary:        Click is a app building method
 License:        LGPLv3+
 URL:            https://gitlab.com/ubports/development/core/click
 Source0:        %{url}/-/archive/%{version}/click-%{version}.tar.gz
@@ -26,7 +25,8 @@ BuildRequires: systemd-rpm-macros
 BuildRequires: systemd
 
 %description
-Click is a app building method.
+Click is a simplified packaging format that installs in a separate part of
+the file system, suitable for third-party applications.
 
 %package devel
 Summary:  Click development files
@@ -35,11 +35,11 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %description devel
 Development files and headers for Click.
 
-%package -n python3-click
+%package -n python3-lomiri-click
 Summary:  Python3 files for Click
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
-%description -n python3-click
+%description -n python3-lomiri-click
 Python3 files for Click.
 
 %package doc
@@ -89,7 +89,7 @@ rm -rf %{buildroot}%{_bindir}/dh_click %{buildroot}%{_datarootdir}/debhelper %{b
 %{_libdir}/girepository-1.0/Click-0.4.typelib
 %{_datarootdir}/gir-1.0/Click-0.4.gir
 
-%files -n python3-click
+%files -n python3-lomiri-click
 %license LICENSE
 %dir %{_sysconfdir}/click
 %dir %{_sysconfdir}/click/databases

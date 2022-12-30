@@ -41,7 +41,7 @@ Trace/breakpoint trap
 * [] ayatana-indicator-datetime
 * [X] lomiri-sounds
 * [X] libayatana-common
-* [] ayatana-indicator-messages
+* [X] ayatana-indicator-messages
 
 ### Core App Packages
 * [] lomiri-terminal-app
