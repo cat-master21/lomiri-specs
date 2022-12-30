@@ -38,7 +38,7 @@ Trace/breakpoint trap
 * [X] libusermetrics
 * [X] qdjango
 * [X] lomiri-keyboard
-* [] ayatana-indicator-datetime
+* [X] ayatana-indicator-datetime
 * [X] lomiri-sounds
 * [X] libayatana-common
 * [X] ayatana-indicator-messages

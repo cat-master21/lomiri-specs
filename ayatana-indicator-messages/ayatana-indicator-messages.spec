@@ -26,17 +26,17 @@ two technologies developed by Canonical Ltd. for the Unity7 desktop and Lomiri d
 
 %package devel
 Summary:    Development files for %{name}
-Requires:   %{name} = %{version}-%{release}
+Requires:   %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 This package contains the development header files for %{name}.
 
 %package doc
-Summary:   Qml tests and examples for the ofono Qt bindings
+Summary:   Documentation for %{name}
 BuildArch: noarch
 
 %description doc
-This package contains qml tests and examples for ofono Qt bindings.
+This package contains documentation files for %{name}.
 
 %prep
 %autosetup -n %{name}-%{version}

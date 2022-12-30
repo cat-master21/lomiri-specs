@@ -40,6 +40,7 @@ BuildRequires: dpkg-dev
 BuildRequires: systemd-rpm-macros
 Recommends:    lomiri-system-compositor
 Recommends:    lomiri-desktop-session
+Requires:      ayatana-indicator-datetime
 Requires:      lomiri-sounds
 Requires:      lomiri-keyboard
 Requires:      lomiri-ui-toolkit
