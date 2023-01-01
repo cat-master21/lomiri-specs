@@ -28,6 +28,7 @@ Configuration schemas for lomiri.
 %autosetup -n %{name}-main
 
 %build
+sed -i 'sXshareXlibX' touch/lomiri-touch-session
 %cmake -DENABLE_TOUCH_SESSION=ON
 %cmake_build
 

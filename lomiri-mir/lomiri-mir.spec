@@ -23,7 +23,6 @@ Source0:        https://github.com/MirServer/mir/archive/refs/heads/release/1.8.
 Source1:        https://gitlab.com/ubports/development/core/packaging/mir/-/archive/ubports/focal/mir-ubports-focal.tar.gz
 Patch0:         0007-temp-fix-for-removed-declaration-in-EGL-eglmesaext.h.patch
 
-
 BuildRequires:  gcc-c++
 BuildRequires:  cmake, ninja-build, doxygen, graphviz, lcov, gcovr
 BuildRequires:  /usr/bin/xsltproc
@@ -82,7 +81,6 @@ BuildRequires:  %{_bindir}/desktop-file-validate
 %ifarch %{ix86} x86_64 %{arm} aarch64
 BuildRequires:  valgrind
 %endif
-
 
 %description
 Mir is a display server running on linux systems,
@@ -192,13 +190,13 @@ Requires:      %{name}-devel%{?_isa} = %{version}-%{release}
 This package provides the static library for building
 Mir unit and integration tests.
 
-
 %prep
 %autosetup -p1 -n mir-release-1.8
 
 # Apply Lomiri specific patches
 tar -xf '%{SOURCE1}'
-#for i in mir-fix_gcc11/debian/patches/*.patch; do patch -p1 < $i; done
+# Makes windows a fraction of size, meant for phones
+rm -f mir-ubports-focal/debian/patches/ubports/0002-Nested-patchwork-Use-eglImage-for-software-buffers.patch
 for i in mir-ubports-focal/debian/patches/ubports/*.patch; do patch -p1 < $i; done
 
 # Drop -Werror

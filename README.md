@@ -1,9 +1,8 @@
 # lomiri-specs
 Lomiri/Unity8 RPM spec files for Fedora
-**Currently this fails with:**
+**Currently this fails due to other small issues and not being able to login!**
 ```
-(process:8082): GLib-GIO-ERROR **: 15:23:24.487: Settings schema 'org.ayatana.indicator.datetime' is not installed
-Trace/breakpoint trap
+lomiri[4073]: [2022-12-30:16:41:32.995] unrecognised option
 ```
 
 ## Lomiri RPM list:
@@ -61,6 +60,7 @@ Trace/breakpoint trap
 * [] ubuntu-touch-session
 * [X] lomiri-desktop-session
 * [X] suru-icon-theme
+* [] libertine
 * [] ubuntu-sdk
 * [] Extra functionality for lomiri-system-settings
 	* [] lomiri-system-settings-*

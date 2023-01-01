@@ -78,15 +78,6 @@ The %{name}-tests package contains test files for %{name}.
 #cd tests/autopilot && python setup.py install
 %find_lang %{name}
 
-%post
-# From .crossbuilder/post_deploy
-for mode in full-greeter full-shell greeter shell; do
-    if systemctl --user is-active -q lomiri-${mode}.service; then
-        systemctl --user restart lomiri-${mode}.service
-        break
-    fi
-done
-
 %files -f %{name}.lang
 %license COPYING COPYING.LGPL
 %{_bindir}/indicators-client
