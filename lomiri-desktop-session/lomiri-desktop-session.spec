@@ -7,6 +7,8 @@ Summary:    Configuration schemas for lomiri
 License:    LGPLv3
 URL:        https://gitlab.com/ubports/development/core/lomiri-desktop-session
 Source0:    %{url}/-/archive/main/lomiri-desktop-session-main.tar.gz
+Patch0:     https://gitlab.com/cat-master21/lomiri-desktop-session/-/commit/72bac71a58877cf22d2f799bf5d855362dcbdb08.diff
+Patch1:     https://gitlab.com/ubports/development/core/lomiri-desktop-session/-/commit/764dfe831cb13328f16b00214830096faca00bb6.diff
 BuildArch:  noarch
 
 BuildRequires: cmake
@@ -28,7 +30,10 @@ Configuration schemas for lomiri.
 %autosetup -n %{name}-main
 
 %build
-sed -i 'sXshareXlibX' touch/lomiri-touch-session
+# https://gitlab.com/ubports/development/core/lomiri-desktop-session/-/issues/5
+sed -i 's/export MIR_SERVER_ENABLE_X11/dbus-update-activation-environment --systemd MIR_SERVER_ENABLE_X11/' lomiri-session
+sed -i 's/export MIR_SERVER_X11_DISPLAYFD/dbus-update-activation-environment --systemd MIR_SERVER_X11_DISPLAYFD/' lomiri-session
+
 %cmake -DENABLE_TOUCH_SESSION=ON
 %cmake_build
 

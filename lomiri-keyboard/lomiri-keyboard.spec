@@ -22,6 +22,7 @@ BuildRequires: libpinyin-devel
 BuildRequires: hunspell-devel
 BuildRequires: maliit-framework-devel
 Recommends:    lomiri
+Requires:      maliit-keyboard
 Requires:      maliit-framework
 
 %description

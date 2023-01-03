@@ -126,6 +126,7 @@ that use the Mir server.
 %package client-libs
 Summary:       Client libraries for Mir
 License:       LGPLv2 or LGPLv3
+Requires:      dmz-cursor-themes
 Requires:      %{name}-common-libs%{?_isa} = %{version}-%{release}
 # debug extension for mirclient is gone...
 Obsoletes:     %{name}-client-libs-debugext < 1.6.0
@@ -171,13 +172,13 @@ BuildArch:     noarch
 This package provides documentation for developing Mir based
 applications.
 
-%package -n python3-mir-perf-framework
+%package -n python3-lomiri-mir-perf-framework
 Summary:       Performance benchmark framework for Mir
 License:       GPLv2 or GPLv3
 BuildArch:     noarch
-%{?python_provide:%python_provide python3-mir-perf-framework}
+%{?python_provide:%python_provide python3-lomiri-mir-perf-framework}
 
-%description -n python3-mir-perf-framework
+%description -n python3-lomiri-mir-perf-framework
 This package provides a benchmark framework for Mir
 and Mir based applications.
 
@@ -195,12 +196,19 @@ Mir unit and integration tests.
 
 # Apply Lomiri specific patches
 tar -xf '%{SOURCE1}'
-# Makes windows a fraction of size, meant for phones
-rm -f mir-ubports-focal/debian/patches/ubports/0002-Nested-patchwork-Use-eglImage-for-software-buffers.patch
+# Meant for phones
+#rm -f mir-ubports-focal/debian/patches/ubports/0002-Nested-patchwork-Use-eglImage-for-software-buffers.patch
 for i in mir-ubports-focal/debian/patches/ubports/*.patch; do patch -p1 < $i; done
+
+# Backported https://github.com/MirServer/mir/commit/45a4ec0856512358a9002e4aff3fe07e79e0310c
+sed -i 's/clear_color{0.0f, 0.0f, 0.0f, 0.0f}/clear_color{0.0f, 0.0f, 0.0f, 1.0f}/' src/renderers/gl/renderer.cpp
 
 # Drop -Werror
 sed -e "s/-Werror//g" -i CMakeLists.txt
+
+# A bug with mesa-x11/wayland
+# We always have gl in Fedora so it isn't really an issue
+sed -i 's1BOOST_THROW_EXCEPTION(std::logic_error("DisplayBuffer does not support GL rendering"));1printf("DisplayBuffer does not support GL rendering");1' src/renderers/gl/renderer.cpp
 
 %build
 
@@ -211,8 +219,8 @@ sed -e "s/-Werror//g" -i CMakeLists.txt
         -DMIR_FATAL_COMPILE_WARNINGS=OFF \
         -DMIR_RUN_INTEGRATION_TESTS=OFF \
         -DMIR_BUILD_UNIT_TESTS=OFF \
-        -DMIR_PLATFORM="mesa-kms;mesa-x11;wayland;eglstream-kms"
-
+        -DMIR_PLATFORM="mesa-x11;wayland;eglstream-kms"
+        # mesa-kms is buggy and causes screen-tear
 cmake --build redhat-linux-build -j$(nproc)
 
 # Build documentation
@@ -270,7 +278,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/miral-shell.desktop
 %{_libdir}/libmirserver.so.*
 %{_libdir}/libmirwayland.so.*
 %dir %{_libdir}/mir/server-platform
-%{_libdir}/mir/server-platform/graphics-mesa-kms.so.*
+#{_libdir}/mir/server-platform/graphics-mesa-kms.so.*
 %{_libdir}/mir/server-platform/input-evdev.so.*
 %{_libdir}/mir/server-platform/server-mesa-x11.so.*
 %{_libdir}/mir/server-platform/graphics-eglstream-kms.so.*
@@ -314,7 +322,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/miral-shell.desktop
 %doc README.md
 %{_datadir}/doc/mir-doc/html
 
-%files -n python3-mir-perf-framework
+%files -n python3-lomiri-mir-perf-framework
 %license COPYING.GPL*
 %doc README.md
 %{python3_sitelib}/mir_perf_framework

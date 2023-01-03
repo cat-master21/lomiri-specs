@@ -1,9 +1,6 @@
 # lomiri-specs
 Lomiri/Unity8 RPM spec files for Fedora
-**Currently this fails due to other small issues and not being able to login!**
-```
-lomiri[4073]: [2022-12-30:16:41:32.995] unrecognised option
-```
+**currently this is highly experimental due to various issues!**
 
 ## Lomiri RPM list:
 ### Core Packages
