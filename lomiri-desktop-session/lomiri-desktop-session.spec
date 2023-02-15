@@ -31,8 +31,10 @@ Configuration schemas for lomiri.
 
 %build
 # https://gitlab.com/ubports/development/core/lomiri-desktop-session/-/issues/5
-sed -i 's/export MIR_SERVER_ENABLE_X11/dbus-update-activation-environment --systemd MIR_SERVER_ENABLE_X11/' lomiri-session
-sed -i 's/export MIR_SERVER_X11_DISPLAYFD/dbus-update-activation-environment --systemd MIR_SERVER_X11_DISPLAYFD/' lomiri-session
+sed -i '/export MIR_SERVER_ENABLE_X11/d lomiri-session
+sed -i '/export MIR_SERVER_X11_DISPLAYFD/d lomiri-session
+#sed -i 's/export MIR_SERVER_ENABLE_X11/dbus-update-activation-environment --systemd MIR_SERVER_ENABLE_X11/' lomiri-session
+#sed -i 's/export MIR_SERVER_X11_DISPLAYFD/dbus-update-activation-environment --systemd MIR_SERVER_X11_DISPLAYFD/' lomiri-session
 
 %cmake -DENABLE_TOUCH_SESSION=ON
 %cmake_build

@@ -30,10 +30,13 @@ sed -i 'sX/usr/lib/qt5X${CMAKE_LIBDIR}/qt5X' src/QmlPlugins/QmlPluginsConfig.cma
 
 %build
 %cmake
-%cmake_install
+%cmake_build
 
 %install
 %cmake_install
+# Correct this as we actually don't have a gmock source dir
+rm %{buildroot}/usr/share/cmake/GMock/GMockConfig.cmake
+cp %{SOURCE1} %{buildroot}/usr/share/cmake/GMock/
 
 %files
 %license LICENSE
