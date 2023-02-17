@@ -1,4 +1,6 @@
-# lomiri-specs
+# **Currently this repository is a mess. These packages are being rewritten for inclusion in [Terra-pkg](https://terra.fyralabs.com/).**
+
+## lomiri-specs
 Lomiri/Unity8 RPM spec files for Fedora
 **currently this is highly experimental due to various issues!**
 
